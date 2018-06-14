@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    volumes:
+      - ./app/:/src
+    ports:
+      - "80:1337"
+    env_file: prod.env
+    depends_on:
+      - db
+    restart: always

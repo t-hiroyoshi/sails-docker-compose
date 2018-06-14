@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    volumes:
+      - ./app/:/src
+    ports:
+      - "1337:1337"
+    env_file: dev.env
+    depends_on:
+      - db
+    command: sails lift
+    restart: always
